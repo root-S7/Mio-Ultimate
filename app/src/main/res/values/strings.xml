@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">澪-Ultimate</string>
+    <string name="app_title">澪-Ultimate v0.4(测试版)</string>
+    <string name="state">主页</string>
+    <string name="start">开始游戏</string>
+    <string name="version">未选择版本</string>
+    <string name="account">账号</string>
+    <string name="user">用户</string>
+    <string name="game">游戏</string>
+    <string name="gameCtr">游戏管理</string>
+    <string name="gamelist">游戏列表</string>
+    <string name="launcher">启动器</string>
+    <string name="launcherSetting">设置</string>
+	<string name="launcherAbout">关于</string>
+    <string name="ok">确定</string>
+    <string name="cancle">取消</string>
+    <string name="tip">提示</string>
+    <string name="sureExit">确定要退出吗？</string>
+    <string name="customBtn">自定义按键</string>
+    <string name="exitGame">退出游戏</string>
+    <string name="command">快捷命令</string>
+    <string name="cmdSetting">命令设置</string>
+    <string name="destoryOrPlace">破坏/放置切换</string>
+    <string name="btnVisibility">按键隐藏/显示</string>
+    <string name="gyroscopeSwitch">陀螺仪开关</string>
+    <string name="allKey">全键开关</string>
+</resources>

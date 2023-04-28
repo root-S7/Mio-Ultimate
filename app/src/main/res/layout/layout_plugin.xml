@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/layout_gamedir"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:background="#8BFFFFFF"
+	android:layout_height="match_parent">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:paddingTop="5dp"
+		android:paddingBottom="5dp"
+		android:background="@color/colorPrimary">
+
+		<LinearLayout
+			android:visibility="invisible"
+            android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="5dp"
+			android:layout_marginRight="10dp"
+			android:orientation="horizontal">
+
+			<ImageView
+				android:src="@drawable/ic_plus"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"/>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:paddingTop="3dp"
+				android:text="添加插件"
+				android:textColor="#FFFFFFFF"/>
+
+		</LinearLayout>
+
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:padding="10dp">
+
+		<LinearLayout
+			android:id="@+id/layout_plugin_open_installer"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_margin="5dp"
+			android:background="@drawable/background_layout_item"
+			android:orientation="horizontal">
+
+			<ImageView
+                android:layout_width="40dp"
+				android:layout_height="40dp"
+				android:layout_margin="10dp"
+				android:layout_gravity="center"
+				android:src="@drawable/craft_table"
+				android:padding="5dp"/>
+
+			<LinearLayout
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:layout_weight="1"
+				android:orientation="vertical">
+
+				<TextView
+					android:textAppearance="@style/TextAppearance.AppCompat.Large"
+					android:text="澪-Installer"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="3dp"
+					android:layout_marginBottom="1dp"
+					android:textColor="@color/colorPrimary"/>
+
+				<TextView
+					android:id="@+id/layout_plugin_text_state_installer"
+					android:textAppearance="@style/TextAppearance.AppCompat.Small"
+					android:text="未安装"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textColor="@color/colorPrimary"/>
+
+			</LinearLayout>
+
+			<ImageButton
+				android:id="@+id/layout_plugin_install_installer"
+				android:layout_width="25dp"
+				android:layout_height="25dp"
+				android:layout_gravity="center"
+				android:layout_marginEnd="10dp"
+				style="?android:attr/buttonBarButtonStyle"
+				android:src="@drawable/ic_install"/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</LinearLayout>
+

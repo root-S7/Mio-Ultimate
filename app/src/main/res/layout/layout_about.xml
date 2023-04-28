@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:id="@+id/layout_about"
+	android:background="#8BFFFFFF"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:padding="10dp">
+
+		<LinearLayout
+			android:orientation="vertical"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
+
+			<LinearLayout
+				android:orientation="horizontal"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:gravity="center"
+				android:background="@drawable/background_layout_item"
+				android:padding="10dp">
+
+				<Button
+					android:id="@+id/layout_about_donate"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="赞助"
+					android:layout_marginRight="10dp"
+					android:background="@drawable/background_button"
+					android:textColor="#FFFFFFFF"
+					android:layout_weight="1.0"/>
+
+				<Button
+					android:id="@+id/layout_about_futureplan"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="未来更新计划"
+					android:background="@drawable/background_button"
+					android:textColor="#FFFFFFFF"
+					android:layout_weight="1.0"/>
+
+			</LinearLayout>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="赞助列表"/>
+			
+			<LinearLayout
+				android:orientation="horizontal"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:gravity="center"
+				android:background="@drawable/background_layout_item"
+				android:padding="10dp">
+				
+				<TextView
+					android:id="@+id/layout_about_donationlist"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text=""/>
+
+			</LinearLayout>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="关于启动器"/>
+
+			<LinearLayout
+				android:orientation="vertical"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:gravity="center"
+				android:background="@drawable/background_layout_item"
+				android:padding="10dp">
+
+				<ImageView
+					android:src="@drawable/ic"
+					android:layout_width="64dp"
+					android:layout_height="64dp"
+					android:id="@+id/layout_settingImageViewDeleteRuntime"/>
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="Boat"
+					android:textSize="20sp"/>
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="Boat原版作者github:@CosineMath"/>
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:autoLink="all"
+					android:text="项目地址：https://github.com/CosineMath/BoatApp"/>
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:autoLink="all"
+					android:text="使用到的开源项目:\nbubbleseekbar\nOverWatchLoading\nOkDownload\nLFilePicker\nCustomActivityOnCrash\nAndroid-gif-drawable"/>
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+	</ScrollView>
+
+</LinearLayout>
+

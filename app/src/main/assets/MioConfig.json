@@ -1,0 +1,17 @@
+{
+  "game_directory": "/storage/emulated/0/MioLauncher/.minecraft",
+  "game_assets": "/storage/emulated/0/MioLauncher/.minecraft/assets/virtual/legacy",
+  "assets_root": "/storage/emulated/0/MioLauncher/.minecraft/assets",
+  "user_properties": "{}",
+  "auth_uuid": "",
+  "libraries": "/storage/emulated/0/MioLauncher/.minecraft/libraries",
+  "isIsolated": "false",
+  "auth_access_token": "",
+  "currentVersion": "",
+  "home": "/storage/emulated/0/MioLauncher",
+  "extraMinecraftFlags": "",
+  "user_type": "mojang",
+  "auth_session": "0",
+  "auth_player_name": "Mio",
+  "extraJavaFlags": "-Xmx1500M"
+}

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/layout_setting"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:background="#8BFFFFFF"
+	android:layout_height="match_parent">
+
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:padding="10dp">
+
+		<LinearLayout
+			android:orientation="vertical"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center">
+
+			<LinearLayout
+				android:orientation="vertical"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:gravity="center"
+				android:background="@drawable/background_layout_item"
+				android:padding="10dp">
+
+				<LinearLayout
+					android:orientation="horizontal"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:gravity="center"
+					android:padding="5dp">
+
+					<Button
+						android:id="@+id/layout_settingButtonHelp"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="澪的B站主页"
+						android:background="@drawable/background_button"
+						android:textColor="#FFFFFFFF"
+						android:layout_weight="1.0"/>
+
+					<Button
+						android:id="@+id/layout_settingButtonMouse"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="鼠标选择"
+						android:background="@drawable/background_button"
+						android:textColor="#FFFFFFFF"
+						android:layout_marginLeft="20dp"
+						android:layout_marginRight="20dp"
+						android:layout_weight="1.0"/>
+
+					<Button
+						android:id="@+id/layout_settingButtonBackground"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="背景选择"
+						android:background="@drawable/background_button"
+						android:textColor="#FFFFFFFF"
+						android:layout_weight="1.0"/>
+
+				</LinearLayout>
+
+				<LinearLayout
+					android:orientation="horizontal"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:gravity="center"
+					android:padding="5dp">
+
+					<Button
+						android:id="@+id/layout_settingButtonChooseGif"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="Gif选择"
+						android:background="@drawable/background_button"
+						android:textColor="#FFFFFFFF"
+						android:layout_weight="1.0"/>
+
+					<Button
+						android:id="@+id/layout_settingButtonFix"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="乱码修复"
+						android:background="@drawable/background_button"
+						android:textColor="#FFFFFFFF"
+						android:layout_marginLeft="20dp"
+						android:layout_marginRight="20dp"
+						android:layout_weight="1.0"/>
+
+					<Button
+						android:id="@+id/layout_settingButtonToCmd"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="终端"
+						android:background="@drawable/background_button"
+						android:textColor="#FFFFFFFF"
+						android:layout_weight="1.0"/>
+
+				</LinearLayout>
+
+				<LinearLayout
+					android:orientation="horizontal"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:gravity="center"
+					android:padding="5dp">
+
+					<Button
+						android:id="@+id/layout_settingButtonChangeFbl"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="分辨率缩放"
+						android:background="@drawable/background_button"
+						android:textColor="#FFFFFFFF"
+						android:layout_weight="1.0"/>
+
+				</LinearLayout>
+
+				<LinearLayout
+					android:orientation="horizontal"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:gravity="center">
+
+					<CheckBox
+						android:id="@+id/layout_settingCheckBoxFull"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:hint="全屏(安卓9.0+可使用)"/>
+
+					<CheckBox
+						android:id="@+id/layout_settingCheckBoxRender"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:hint="使用gl4es1.1.5(慎用)"/>
+
+					<CheckBox
+						android:id="@+id/layout_settingCheckBoxCaci"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:hint="启用Cacio(用于首次启动i18n汉化mod)"/>
+
+				</LinearLayout>
+			</LinearLayout>
+
+		</LinearLayout>
+
+	</ScrollView>
+
+</LinearLayout>
+

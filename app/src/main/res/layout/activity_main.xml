@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:animateLayoutChanges="true"
+	android:id="@+id/activity_mainRelativeLayout"
+	android:background="@mipmap/bg2">
+
+	<androidx.appcompat.widget.Toolbar
+		app:layout_constraintTop_toTopOf="parent"
+		app:layout_constraintLeft_toLeftOf="parent"
+		app:layout_constraintRight_toRightOf="parent"
+		app:layout_constraintHeight_percent="0.1"
+		android:id="@+id/main_toolbar"
+		android:layout_width="0dp"
+		android:layout_height="0dp"
+		android:background="@drawable/background_toolbar"
+		android:elevation="4dp"
+		android:minHeight="?attr/actionBarSize"
+		app:title="@string/app_title"
+		app:titleTextColor="#FFF"
+		android:theme="?attr/actionBarTheme">
+
+		<TextView
+			android:id="@+id/main_text_state"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/state"
+			android:layout_marginLeft="105dp"
+			android:textColor="@color/puredark"/>
+
+		<TextView
+			android:textColor="@color/puredark"
+			android:id="@+id/main_text_info"
+			android:paddingLeft="10dp"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="" />
+
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="end"
+			android:layout_marginEnd="5dp"
+			android:orientation="horizontal">
+
+			<Button android:textAllCaps="false"
+				android:id="@+id/toolbar_button_home"
+				android:layout_width="25dp"
+				android:layout_height="25dp"
+				android:layout_marginEnd="5dp"
+				android:background="@drawable/ic_home"/>
+
+			<Button android:textAllCaps="false"
+				android:id="@+id/toolbar_button_exit"
+				android:layout_width="25dp"
+				android:layout_height="25dp"
+				android:layout_marginEnd="5dp"
+				android:background="@drawable/ic_close"/>
+
+		</LinearLayout>
+
+	</androidx.appcompat.widget.Toolbar>
+
+	<LinearLayout
+		app:layout_constraintHeight_percent="0.13"
+		app:layout_constraintRight_toRightOf="parent"
+		app:layout_constraintBottom_toBottomOf="parent"
+		android:id="@+id/layout_startgame"
+		android:layout_width="wrap_content"
+		android:layout_height="0dp"
+		android:layout_margin="40dp"
+		android:paddingLeft="30dp"
+		android:paddingRight="20dp"
+		android:paddingTop="5dp"
+		android:paddingBottom="5dp"
+		android:background="@color/colorPrimary"
+		android:orientation="horizontal">
+
+		<LinearLayout
+			android:layout_marginLeft="30dp"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:layout_gravity="center">
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:text="@string/start"
+				android:textColor="#F5F5F5"
+				android:textSize="14sp"/>
+
+			<TextView
+				android:id="@+id/activity_main_versiontext"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:text="@string/version"
+				android:textColor="#F5F5F5"
+				android:textSize="12sp"/>
+
+		</LinearLayout>
+
+		<TextView
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1"/>
+
+		<Button
+			android:textColor="#FFF"
+			android:background="@android:color/transparent"
+			android:id="@+id/activity_main_choose_version"
+			android:layout_width="80dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:text="▼" />
+
+	</LinearLayout>
+
+	<ScrollView
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintLeft_toLeftOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/main_toolbar"
+		app:layout_constraintWidth_percent="0.2"
+		android:id="@+id/activity_mainScrollView"
+		android:fillViewport="true"
+		android:layout_width="0dp"
+		android:layout_height="0dp"
+		android:layout_below="@id/main_toolbar">
+
+		<androidx.constraintlayout.widget.ConstraintLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:background="@drawable/background_layout_fictionlist">
+
+			<TextView
+				android:id="@+id/a1"
+				app:layout_constraintLeft_toLeftOf="parent"
+				app:layout_constraintTop_toTopOf="parent"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/account"
+				android:textSize="10sp"
+				android:layout_marginLeft="5dp"
+				android:layout_marginTop="10dp"/>
+
+			<View
+				android:id="@+id/a2"
+				app:layout_constraintTop_toBottomOf="@id/a1"
+				android:background="?android:attr/dividerVertical"
+				android:layout_width="match_parent"
+				android:layout_height="1px"/>
+
+			<Button
+				app:layout_constraintHeight_percent="0.12"
+				app:layout_constraintTop_toBottomOf="@id/a2"
+				app:layout_constraintLeft_toLeftOf="parent"
+				android:textColor="@color/colorPrimary"
+				android:textAllCaps="false"
+				android:id="@+id/main_button_user"
+				android:layout_width="match_parent"
+				android:layout_height="0dp"
+				android:background="@drawable/layout_button_background"
+				android:drawableStart="@drawable/steve"
+				android:drawablePadding="6dp"
+				android:gravity="center_vertical"
+				android:paddingStart="15dp"
+				android:text="@string/user"
+				android:paddingEnd="0dp"/>
+
+			<TextView
+				android:id="@+id/a3"
+				app:layout_constraintLeft_toLeftOf="parent"
+				app:layout_constraintTop_toBottomOf="@id/main_button_user"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/game"
+				android:textSize="10sp"
+				android:layout_marginLeft="5dp"
+				android:layout_marginTop="10dp"/>
+
+			<View
+				android:id="@+id/a4"
+				app:layout_constraintLeft_toLeftOf="parent"
+				app:layout_constraintTop_toBottomOf="@id/a3"
+				android:background="?android:attr/dividerVertical"
+				android:layout_width="match_parent"
+				android:layout_height="1px"/>
+
+			<Button
+				app:layout_constraintHeight_percent="0.12"
+				app:layout_constraintTop_toBottomOf="@id/a4"
+				app:layout_constraintLeft_toLeftOf="parent"
+				android:textColor="@color/colorPrimary"
+				android:textAllCaps="false"
+				android:id="@+id/main_button_version"
+				android:layout_width="match_parent"
+				android:layout_height="0dp"
+				android:background="@drawable/layout_button_background"
+				android:drawableStart="@drawable/grass"
+				android:drawablePadding="6dp"
+				android:gravity="center_vertical"
+				android:paddingStart="15dp"
+				android:text="@string/gameCtr"
+				android:paddingEnd="0dp"/>
+
+			<Button
+				app:layout_constraintHeight_percent="0.12"
+				app:layout_constraintTop_toBottomOf="@id/main_button_version"
+				app:layout_constraintLeft_toLeftOf="parent"
+				android:textColor="@color/colorPrimary"
+				android:textAllCaps="false"
+				android:id="@+id/main_button_gamelist"
+				android:layout_width="match_parent"
+				android:layout_height="0dp"
+				android:background="@drawable/layout_button_background"
+				android:drawableStart="@drawable/bookshelf"
+				android:drawablePadding="6dp"
+				android:gravity="center_vertical"
+				android:paddingStart="15dp"
+				android:text="@string/gamelist"
+				android:paddingEnd="0dp"/>
+
+			<TextView
+				android:id="@+id/a5"
+				app:layout_constraintTop_toBottomOf="@id/main_button_gamelist"
+				app:layout_constraintLeft_toLeftOf="parent"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="插件"
+				android:textSize="10sp"
+				android:layout_marginLeft="5dp"
+				android:layout_marginTop="10dp"/>
+
+			<View
+				android:id="@+id/a6"
+				app:layout_constraintTop_toBottomOf="@id/a5"
+				app:layout_constraintLeft_toLeftOf="parent"
+				android:background="?android:attr/dividerVertical"
+				android:layout_width="match_parent"
+				android:layout_height="1px"/>
+
+			<Button
+				app:layout_constraintHeight_percent="0.12"
+				app:layout_constraintTop_toBottomOf="@id/a6"
+				app:layout_constraintLeft_toLeftOf="parent"
+				android:textColor="@color/colorPrimary"
+				android:textAllCaps="false"
+				android:id="@+id/main_button_plugin"
+				android:layout_width="match_parent"
+				android:layout_height="0dp"
+				android:background="@drawable/layout_button_background"
+				android:drawableStart="@drawable/craft_table"
+				android:drawablePadding="6dp"
+				android:gravity="center_vertical"
+				android:paddingStart="15dp"
+				android:text="启动器插件"
+				android:paddingEnd="0dp"/>
+
+			<TextView
+				android:id="@+id/a7"
+				app:layout_constraintTop_toBottomOf="@id/main_button_plugin"
+				app:layout_constraintLeft_toLeftOf="parent"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/launcher"
+				android:textSize="10sp"
+				android:layout_marginLeft="5dp"
+				android:layout_marginTop="10dp"/>
+
+			<View
+				app:layout_constraintTop_toBottomOf="@id/a7"
+				app:layout_constraintLeft_toLeftOf="parent"
+				android:background="?android:attr/dividerVertical"
+				android:layout_width="match_parent"
+				android:layout_height="1px"/>
+
+			<Button
+				app:layout_constraintHeight_percent="0.12"
+				app:layout_constraintTop_toBottomOf="@id/a7"
+				app:layout_constraintLeft_toLeftOf="parent"
+				android:textColor="@color/colorPrimary"
+				android:textAllCaps="false"
+				android:id="@+id/main_button_log"
+				android:layout_width="match_parent"
+				android:layout_height="0dp"
+				android:background="@drawable/layout_button_background"
+				android:drawableStart="@drawable/book_writable"
+				android:drawablePadding="6dp"
+				android:gravity="center_vertical"
+				android:paddingStart="15dp"
+				android:text="日志"
+				android:paddingEnd="0dp"/>
+
+			<Button
+				app:layout_constraintHeight_percent="0.12"
+				app:layout_constraintTop_toBottomOf="@id/main_button_log"
+				app:layout_constraintLeft_toLeftOf="parent"
+				android:textColor="@color/colorPrimary"
+				android:textAllCaps="false"
+				android:id="@+id/main_button_setting"
+				android:layout_width="match_parent"
+				android:layout_height="0dp"
+				android:background="@drawable/layout_button_background"
+				android:drawableStart="@drawable/command"
+				android:drawablePadding="6dp"
+				android:gravity="center_vertical"
+				android:paddingStart="15dp"
+				android:text="@string/launcherSetting"
+				android:paddingEnd="0dp"/>
+
+			<Button
+				app:layout_constraintHeight_percent="0.12"
+				app:layout_constraintTop_toBottomOf="@id/main_button_setting"
+				app:layout_constraintLeft_toLeftOf="parent"
+				android:textColor="@color/colorPrimary"
+				android:textAllCaps="false"
+				android:id="@+id/main_button_about"
+				android:layout_width="match_parent"
+				android:layout_height="0dp"
+				android:background="@drawable/layout_button_background"
+				android:drawableStart="@drawable/furnace"
+				android:drawablePadding="6dp"
+				android:gravity="center_vertical"
+				android:paddingStart="15dp"
+				android:text="@string/launcherAbout"
+				android:paddingEnd="0dp"/>
+
+		</androidx.constraintlayout.widget.ConstraintLayout>
+
+	</ScrollView>
+
+	<ScrollView
+		app:layout_constraintTop_toBottomOf="@id/main_toolbar"
+		app:layout_constraintLeft_toRightOf="@id/activity_mainScrollView"
+		android:id="@+id/tip_container"
+		android:alpha="0.7"
+		android:layout_below="@id/main_toolbar"
+		android:layout_marginTop="10dp"
+		android:layout_marginLeft="10dp"
+		android:layout_height="150dp"
+		android:layout_width="250dp"
+		android:background="@drawable/background_info">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:text="公告"
+				android:textAppearance="@style/TextAppearance.Compat.Notification.Title" />
+
+			<View
+				android:layout_width="match_parent"
+				android:layout_height="1dp"
+				android:background="?android:attr/listDivider" />
+
+			<TextView
+				android:autoLink="all"
+				android:layout_margin="5dp"
+				android:id="@+id/home_text_content"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" />
+
+		</LinearLayout>
+	</ScrollView>
+
+	<RelativeLayout
+		android:visibility="visible"
+		app:layout_constraintLeft_toRightOf="@id/activity_mainScrollView"
+		app:layout_constraintRight_toRightOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/main_toolbar"
+		app:layout_constraintBottom_toBottomOf="parent"
+		android:layout_width="0dp"
+		android:layout_height="0dp">
+
+		<View
+			android:background="?android:attr/dividerHorizontal"
+			android:layout_width="1px"
+			android:layout_height="match_parent"/>
+
+		<include
+			layout="@layout/layout_user"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"/>
+
+		<include
+			layout="@layout/layout_version"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"/>
+
+		<include
+			layout="@layout/layout_gamelist"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"/>
+
+		<include
+			layout="@layout/layout_plugin"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"/>
+
+		<include
+			layout="@layout/layout_log"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"/>
+
+		<include
+			layout="@layout/layout_setting"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"/>
+
+		<include
+			layout="@layout/layout_about"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"/>
+
+	</RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

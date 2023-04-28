@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:gravity="center">
+
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="20dp"
+		android:layout_marginRight="20dp"
+		android:gravity="center">
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="用户:"/>
+
+		<EditText
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/alert_login_edit_account"/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:visibility="gone"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/alert_login_linear_pass"
+		android:orientation="vertical">
+
+		<LinearLayout
+			android:layout_marginLeft="20dp"
+			android:layout_marginRight="20dp"
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:visibility="visible">
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="密码:"/>
+
+			<EditText
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/alert_login_edit_password"/>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_marginLeft="20dp"
+			android:layout_marginRight="20dp"
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:visibility="visible">
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="url:"/>
+
+			<EditText
+				android:lines="1"
+				android:hint="留空则默认使用mojang服务器登录"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/alert_login_edit_url"/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+
+
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content">
+
+		<CheckBox
+			android:checked="true"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:hint="离线登录"
+			android:id="@+id/alert_login_check"/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content">
+
+		<Button
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="确定"
+			android:layout_marginRight="10dp"
+			android:id="@+id/alert_login_btn_login"/>
+
+		<Button
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="取消"
+			android:id="@+id/alert_login_btn_cancle"/>
+
+	</LinearLayout>
+
+</LinearLayout>
+
