@@ -1,4 +1,4 @@
-rootProject.name = "Mio-Ultimate"
+rootProject.name = "Mio-Ultimate-Server"
+include ':app'
 include ':MioCustom'
 include ':lfilepickerlibrary'
-include ':app'

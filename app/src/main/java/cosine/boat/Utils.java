@@ -10,21 +10,16 @@ import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 
 public final class Utils {
-	
-	
 	public static File createFile(String filePath){
 		File file = new File(filePath);
 		if (file.exists()){
 			file.delete();
 		}
 		file.getParentFile().mkdirs();
-
-		try
-		{
+		try {
 			file.createNewFile();
 		}
-		catch (IOException e)
-		{
+		catch (IOException e) {
 			e.printStackTrace();
 			return null;
 		}
@@ -44,7 +39,6 @@ public final class Utils {
 			fis.close();
 			return b;
 		}catch(Exception e){
-
 			e.printStackTrace();
 		}
 		finally{
@@ -60,12 +54,9 @@ public final class Utils {
 		return null;
 	}
 	
-	
-	
+
 	public static boolean writeFile(String filePath, byte[] arys){
-		
 		File file = Utils.createFile(filePath);
-		
 		if (file == null){
 			return false;
 		}
@@ -92,13 +83,10 @@ public final class Utils {
 		return false;
 	}
 	public static boolean writeFile(String filePath, String str){
-
-		try
-		{
+		try {
 			return Utils.writeFile(filePath, str.getBytes("UTF-8"));
 		}
-		catch (UnsupportedEncodingException e)
-		{
+		catch (UnsupportedEncodingException e){
 			return false;
 		}
 	}
@@ -125,12 +113,10 @@ public final class Utils {
 		}
 		finally{
 			if (fos != null){
-				try
-				{
+				try {
 					fos.close();
 				}
-				catch (IOException e)
-				{}
+				catch (IOException e){}
 			}
 		}
 		return false;
@@ -140,37 +126,29 @@ public final class Utils {
 		
 	}
 	
-	
 	public static boolean extractAsset(AssetManager am, String src, String tgt ){
 		FileOutputStream fos = null;
 		InputStream is = null;
-		
-		try
-		{
+		try {
 			File target = new File(tgt);
 			if (!target.exists()) {
 				target.createNewFile();
 			}
 			fos = new FileOutputStream(target);
-			
 			is = am.open(src);
 			byte[] buf = new byte[1024];
 			int count = 0;
-			
 			while ((count = is.read(buf)) != -1) {
 				fos.write(buf, 0, count);
 			}
-
 			fos.flush();
 			fos.close();
 			is.close();
 			return true;
 		}
-		catch (IOException e)
-		{
+		catch (IOException e) {
 			e.printStackTrace();
-			try
-			{
+			try {
 				if (is != null){
 					is.close();
 				}
@@ -178,21 +156,15 @@ public final class Utils {
 					fos.close();
 				}
 			}
-			catch (IOException s)
-			{}
-			
-			
+			catch (IOException s) {}
 			return false;
 		}
-	
-
-	
 	}
 	/**
      * MD5加密
      * @param byteStr 需要加密的内容
      * @return 返回 byteStr的md5值
-     */
+    **/
     public static String encryptionMD5(byte[] byteStr) {
         MessageDigest messageDigest = null;
         StringBuffer md5StrBuff = new StringBuffer();
@@ -213,7 +185,6 @@ public final class Utils {
         }
         return md5StrBuff.toString();
     }
-
     /**
      * 获取app签名md5值
      */

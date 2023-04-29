@@ -7,47 +7,20 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.SurfaceTexture;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
+import android.graphics.*;
+import android.hardware.*;
+import android.os.*;
 import androidx.annotation.RequiresApi;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.cardview.widget.CardView;
-
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
-import android.view.Surface;
-import android.view.TextureView;
-import android.view.View;
+import android.view.*;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.mio.launcher.MioInfo;
-import com.mio.launcher.MioMouseKeyboard;
-import com.mio.launcher.MioUtils;
-import com.mio.launcher.R;
+import android.widget.*;
+import com.mio.launcher.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -57,20 +30,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import pl.droidsonroids.gif.GifDrawable;
 import pl.droidsonroids.gif.GifImageView;
-import com.mio.launcher.Splash;
-import com.mio.mclauncher.customcontrol.MioCrossingKeyboard;
-import com.mio.mclauncher.customcontrol.MioCustomButton;
-import com.mio.mclauncher.customcontrol.MioCustomManager;
 
+import com.mio.launcher.R;
+import com.mio.mclauncher.customcontrol.*;
 import android.view.ViewGroup;
-
-
 
 /**
  * @author mio
- */
-public class BoatActivity extends Activity implements TextureView.SurfaceTextureListener, View.OnClickListener, TextView.OnEditorActionListener
-{
+**/
+public class BoatActivity extends Activity implements TextureView.SurfaceTextureListener, View.OnClickListener, TextView.OnEditorActionListener {
 	static{
 		System.loadLibrary("boat");
 	}
@@ -87,9 +55,7 @@ public class BoatActivity extends Activity implements TextureView.SurfaceTexture
     private Button control9;
     private LinearLayout itemBar;
     private ImageView mouseCursor;
-
 	public boolean mode = false;
-
 	private DrawerLayout mDrawerLayout;
 	private Button btq;
     private Button btw;
@@ -137,37 +103,25 @@ public class BoatActivity extends Activity implements TextureView.SurfaceTexture
     private int dx,dy;
     private Handler handler=new Handler();
     private boolean 长按=false;
-
     private GifImageView mio;
-
     private SharedPreferences msh;
     private SharedPreferences.Editor mshe;
-	
     private boolean 显示=true;
-
-
     private RelativeLayout overlay;
-
     private MioCustomManager mMioCustomManager;
     private MioCrossingKeyboard mioCrossingKeyboard;
-
-
     //陀螺仪
     Sensor 陀螺仪;
     SensorManager 传感器管理器;
     long 时间;
     boolean 传感器开关=false;
     SensorEventListener 传感器事件;
-   
 	//绘制
 	private TextureView miosurface;
-	
 	//键鼠
 	private MioMouseKeyboard mMioMouseKeyBoard;
-
 	private boolean mouseTouchMode=false;
 	private boolean 禁用手势=false;
-
 	private Button openKeyboard;
 	@RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -175,7 +129,7 @@ public class BoatActivity extends Activity implements TextureView.SurfaceTexture
 		super.onCreate(savedInstanceState);
         base = (DrawerLayout) LayoutInflater.from(BoatActivity.this).inflate(R.layout.mio_overlay,null);
 		setContentView(base);
-
+        MioUtils.hideBottomMenu(this,MioLauncher.fullScreen);
         overlay=base.findViewById(R.id.overlayRelativeLayout);
         miosurface=overlay.findViewById(R.id.miosurface);
 		miosurface.setSurfaceTextureListener(this);
@@ -183,11 +137,8 @@ public class BoatActivity extends Activity implements TextureView.SurfaceTexture
 		miosurface.setOnTouchListener(ot);
         msh=getSharedPreferences("Mio",MODE_PRIVATE);
         mshe=msh.edit();
-		
 		mouseCursor = (ImageView)base.findViewById(R.id.mouse_cursor);
-
         禁用手势=msh.getBoolean("禁用手势",false);
-
 		control1 = base.findViewById(R.id.control_1);
 		control2 = base.findViewById(R.id.control_2);
 		control3 = base.findViewById(R.id.control_3);
@@ -197,7 +148,6 @@ public class BoatActivity extends Activity implements TextureView.SurfaceTexture
 		control7 = base.findViewById(R.id.control_7);
 		control8 = base.findViewById(R.id.control_8);
 		control9 = base.findViewById(R.id.control_9);
-		
 		control1.setOnTouchListener(ot);//(R.id.control_1);
 		control2.setOnTouchListener(ot);//(R.id.control_2);
 		control3.setOnTouchListener(ot);//(R.id.control_3);
@@ -207,7 +157,6 @@ public class BoatActivity extends Activity implements TextureView.SurfaceTexture
 		control7.setOnTouchListener(ot);//(R.id.control_7);
 		control8.setOnTouchListener(ot);//(R.id.control_8);
 		control9.setOnTouchListener(ot);//(R.id.control_9);
-        
 		itemBar = (LinearLayout)base.findViewById(R.id.item_bar);
         //全键
         btq=findB(R.id.btq);
@@ -291,15 +240,9 @@ public class BoatActivity extends Activity implements TextureView.SurfaceTexture
         space=findB(R.id.btjump);
         btpr=findB(R.id.btpr);
         btse=findB(R.id.btse);
-
 		mHandler = new MyHandler();
-		
-		
 		initCard();
-
-         
         if(new File(MioUtils.getExternalFilesDir(BoatActivity.this)+"/澪/cursor.png").exists()){
-            
 			new Thread(new Runnable(){
 					@Override
 					public void run() {
@@ -338,22 +281,17 @@ public class BoatActivity extends Activity implements TextureView.SurfaceTexture
                             mouseCursor.setX(baseX);
                             mouseCursor.setY(baseY);
                         }
-                        
                     }
                     时间=event.timestamp;
-
                 }
-
                 @Override
                 public void onAccuracyChanged(Sensor p1, int p2) {
 
                 }
             };
         }
-        
         传感器管理器.registerListener(传感器事件, 陀螺仪, SensorManager.SENSOR_DELAY_GAME);
     }
-
     public void initMio() {
         final RelativeLayout mio_gif_layout=base.findViewById(R.id.mio_gif_layout);
 		mio = mio_gif_layout.findViewById(R.id.mio);
@@ -371,18 +309,11 @@ public class BoatActivity extends Activity implements TextureView.SurfaceTexture
 				GifDrawable gifDrawable  = new GifDrawable(getResources(), R.drawable.fbk);
 				mio.setImageDrawable(gifDrawable);
 				gifDrawable.start();
-			} catch (Resources.NotFoundException e) {
-				
-			} catch (IOException e) {
-				
-			}
-		}
-		
-		
+			} catch (Resources.NotFoundException | IOException ignored) {}
+        }
         Button mio_gif_touch=mio_gif_layout.findViewById(R.id.mio_gif_touch);
         mio_gif_layout.setX((screenwidth / 2)-(mio.getWidth()/2));
         mio_gif_layout.setY((screenheight / 2)-(mio.getHeight()/2));
-
         mio_gif_touch.setOnTouchListener(new View.OnTouchListener(){
             private int 触摸点横坐标_gif;
 
@@ -477,18 +408,10 @@ public class BoatActivity extends Activity implements TextureView.SurfaceTexture
         File key=new File(MioInfo.config.get("currentVersion"),"Miokey.json");
         File options=new File(MioInfo.config.get("currentVersion"),"options.txt");
         if (!key.exists()){
-            try {
-                MioUtils.copyFromAssets(this,key.getName(),key.getAbsolutePath());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            MioUtils.copyFilesFromAssets(this,key.getName(),key.getAbsolutePath());
         }
         if (!options.exists()){
-            try {
-                MioUtils.copyFromAssets(this,options.getName(),options.getAbsolutePath());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            MioUtils.copyFilesFromAssets(this,options.getName(),options.getAbsolutePath());
         }
         mMioCustomManager=new MioCustomManager();
         mMioCustomManager.初始化(this,overlay, new File(MioInfo.config.get("currentVersion")).getAbsolutePath());
@@ -736,106 +659,79 @@ public class BoatActivity extends Activity implements TextureView.SurfaceTexture
 			public void onClick(View p1) {
 				if(p1==custom){
                     CharSequence[] items = {"进入自定义按键模式","重置按键"};
-                    AlertDialog dialog = new AlertDialog.Builder(BoatActivity.this)
-                            .setItems(items, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dia, int which) {
-                                    switch (which){
-                                        case 0:
-                                            mMioCustomManager.自定义开关();
-                                            mioCrossingKeyboard.自定义();
-                                            break;
-                                        case 1:
-                                            mMioCustomManager.清除按键();
-                                            try {
-                                                File key=new File(MioInfo.config.get("currentVersion"),"Miokey.json");
-                                                MioUtils.copyFromAssets(BoatActivity.this,key.getName(),key.getAbsolutePath());
-                                            } catch (IOException e) {
-                                                e.printStackTrace();
+                    AlertDialog dialog = new AlertDialog.Builder(BoatActivity.this).setItems(items, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dia, int which) {
+                            switch (which){
+                                case 0:
+                                    mMioCustomManager.自定义开关();
+                                    mioCrossingKeyboard.自定义();
+                                    break;
+                                    case 1:
+                                        mMioCustomManager.清除按键();
+                                        File key=new File(MioInfo.config.get("currentVersion"),"Miokey.json");
+                                        MioUtils.copyFilesFromAssets(BoatActivity.this,key.getName(),key.getAbsolutePath());
+                                        mMioCustomManager=null;
+                                        mMioCustomManager=new MioCustomManager();
+                                        mMioCustomManager.初始化(BoatActivity.this,overlay, new File(MioInfo.config.get("currentVersion")).getAbsolutePath());
+                                        mMioCustomManager.设置自定义按键回调(new MioCustomManager.自定义按键回调(){
+                                            @Override
+                                            public void 命令接收事件(String 命令) {
+                                                input(命令);
                                             }
-                                            mMioCustomManager=null;
-                                            mMioCustomManager=new MioCustomManager();
-                                            mMioCustomManager.初始化(BoatActivity.this,overlay, new File(MioInfo.config.get("currentVersion")).getAbsolutePath());
-                                            mMioCustomManager.设置自定义按键回调(new MioCustomManager.自定义按键回调(){
-
-                                                @Override
-                                                public void 命令接收事件(String 命令) {
-                                                    input(命令);
-                                                }
-
-                                                @Override
-                                                public void 键值接收事件(int 键值, boolean 按下) {
-                                                    BoatInput.setKey(键值, 0,按下);
-                                                }
-
-                                                @Override
-                                                public void 控制鼠标指针移动事件(int x, int y) {
-                                                    baseX+=x;
-                                                    baseY+=y;
-                                                    BoatInput.setPointer(baseX, baseY);
-                                                    mouseCursor.setX(baseX);
-                                                    mouseCursor.setY(baseY);
-
-                                                }
-
-                                                @Override
-                                                public void 按下() {
-//                                                    屏幕控制_按下=true;
-                                                }
-
-                                                @Override
-                                                public void 抬起() {
-//                                                    屏幕控制_按下=false;
-                                                }
-
-                                                @Override
-                                                public void 鼠标回调(int 键值, boolean 按下) {
-                                                    BoatInput.setMouseButton(键值,按下);
-                                                }
-                                            });
-                                            break;
+                                            @Override
+                                            public void 键值接收事件(int 键值, boolean 按下) {
+                                                BoatInput.setKey(键值, 0,按下);
+                                            }
+                                            @Override
+                                            public void 控制鼠标指针移动事件(int x, int y) {
+                                                baseX+=x;
+                                                baseY+=y;
+                                                BoatInput.setPointer(baseX, baseY);
+                                                mouseCursor.setX(baseX);
+                                                mouseCursor.setY(baseY);
+                                            }
+                                            @Override
+                                            public void 按下() {
+//                                              屏幕控制_按下=true;
+                                            }
+                                            @Override
+                                            public void 抬起() {
+//                                              屏幕控制_按下=false;
+                                            }
+                                            @Override
+                                            public void 鼠标回调(int 键值, boolean 按下) {
+                                                BoatInput.setMouseButton(键值,按下);
+                                            }
+                                        });
+                                        break;
                                     }
                                 }
-                            })
-                            .setNegativeButton("取消", null)
-                            .create();
+                            }).setNegativeButton("取消", null).create();
                     dialog.show();
 					
 				}else if(p1==exit){
-                    
-					AlertDialog dialog=new AlertDialog.Builder(BoatActivity.this)
-						.setTitle(getStr(R.string.tip))
-						.setMessage(getStr(R.string.sureExit))
-						.setPositiveButton(getStr(R.string.ok), new DialogInterface.OnClickListener() {
-
-							@Override
-							public void onClick(DialogInterface dia, int which) {
+					AlertDialog dialog=new AlertDialog.Builder(BoatActivity.this).setTitle(getStr(R.string.tip)).setMessage(getStr(R.string.sureExit)).setPositiveButton(getStr(R.string.ok), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dia, int which) {
                                 System.exit(0);
 							}
-						})
-						.setNegativeButton(getStr(R.string.cancle), null)
-						.create();
+						}).setNegativeButton(getStr(R.string.cancle), null).create();
 					dialog.show();
 				}else if(p1==command){
                     List<String[]> clist=getCommandAndNames();
                     if(clist!=null){
                         final String[] items=clist.get(0);
                         final String[] comms=clist.get(1);
-                        AlertDialog dialog=new AlertDialog.Builder(BoatActivity.this)
-                            .setTitle("快捷命令菜单")
-                            .setItems(items, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dia, int which) {
-                                    input(comms[which]);
-                                }
-                            })
-                            .setNeutralButton("删除", new DialogInterface.OnClickListener(){
+                        AlertDialog dialog=new AlertDialog.Builder(BoatActivity.this).setTitle("快捷命令菜单").setItems(items, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dia, int which) {
+                                input(comms[which]);
+                            }
+                        }).setNeutralButton("删除", new DialogInterface.OnClickListener(){
                                 @Override
                                 public void onClick(DialogInterface p1, int p2) {
-                                    AlertDialog dialog=new AlertDialog.Builder(BoatActivity.this)
-                                        .setTitle("删除命令")
-                                        .setItems(items, new DialogInterface.OnClickListener() {
-
+                                    AlertDialog dialog=new AlertDialog.Builder(BoatActivity.this).setTitle("删除命令").setItems(items, new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dia, int which) {
                                                 try {
@@ -851,12 +747,9 @@ public class BoatActivity extends Activity implements TextureView.SurfaceTexture
                                         .create();
                                     dialog.show();
                                 }
-                            })
-                            .setPositiveButton("关闭菜单", null)
-                            .create();
+                            }).setPositiveButton("关闭菜单", null).create();
                         dialog.show();
                     }
-                    
                 }else if(p1==commandSetting){
                     final LinearLayout add_command=(LinearLayout)LayoutInflater.from(BoatActivity.this).inflate(R.layout.alert_add_command,null);
                     new AlertDialog.Builder(BoatActivity.this)
@@ -1217,10 +1110,6 @@ public class BoatActivity extends Activity implements TextureView.SurfaceTexture
                             }
                             baseX += ((int)p2.getX() -initialX);
                             baseY += ((int)p2.getY() - initialY);
-                            Log.e("initX",initialX+"");
-                            Log.e("initY",initialY+"");
-                            Log.e("X",(int)p2.getX()+"");
-                            Log.e("Y",(int)p2.getY()+"");
                             BoatInput.setPointer(baseX,baseY);
                             mouseCursor.setX(baseX);
                             mouseCursor.setY(baseY);
@@ -1858,14 +1747,6 @@ public class BoatActivity extends Activity implements TextureView.SurfaceTexture
             return false;
         }
     };
-	@Override
-	public void onWindowFocusChanged(boolean hasFocus) {
-		// TODO: Implement this method
-		super.onWindowFocusChanged(hasFocus);
-		if (hasFocus){
-			MioUtils.hideBottomMenu(this,msh.getBoolean("刘海",false));
-		}
-	}
     private List<String[]> getCommandAndNames(){
         try {
             String commands_str=msh.getString("命令","");

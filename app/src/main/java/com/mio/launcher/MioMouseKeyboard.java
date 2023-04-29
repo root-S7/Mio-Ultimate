@@ -23,7 +23,6 @@ public class MioMouseKeyboard {
 		this.mouseCursor=mouse;
 		this.focusView=focusView;
 		mKeyMap=new AndroidKeyMap();
-		
 		mPointerListener=new OnCapturedPointerListener(){
 			@Override
 			public boolean onCapturedPointer(View view, MotionEvent event) {

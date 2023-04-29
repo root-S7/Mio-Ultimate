@@ -1,7 +1,6 @@
 package cosine.boat;
 
 import android.util.ArrayMap;
-
 import java.util.*;
 import com.google.gson.*;
 import com.mio.launcher.MioInfo;

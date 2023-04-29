@@ -7,10 +7,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-
-import com.mio.launcher.MioInfo;
-import com.mio.launcher.R;
-import com.mio.launcher.ShellServer;
+import com.mio.launcher.*;
 
 import java.io.File;
 
@@ -24,6 +21,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_command);
+        MioInfo.initializeMioInfo(MainActivity.this);
         File home=new File(MioInfo.DIR_DATA,"files/home");
         home.mkdirs();
         命令 = findViewById(R.id.activitymainEditText1);

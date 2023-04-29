@@ -1,53 +1,23 @@
 package com.mio.launcher;
 
 import android.app.ProgressDialog;
-import android.content.ComponentName;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
+import android.content.*;
+import android.content.pm.*;
 import android.os.Bundle;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.*;
 import androidx.appcompat.widget.ListPopupWindow;
-
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.RadioGroup;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.liulishuo.filedownloader.BaseDownloadTask;
-import com.liulishuo.filedownloader.FileDownloadListener;
-import com.liulishuo.filedownloader.FileDownloadQueueSet;
-import com.liulishuo.filedownloader.FileDownloader;
-import com.mio.mclauncher.mcdownload.ForgeDownload;
-import com.mio.mclauncher.mcdownload.MioMcFile;
-import com.mio.mclauncher.mcdownload.MioMcVersion;
-import com.mio.mclauncher.mcdownload.OptifineDownload;
-import com.mio.mclauncher.mcdownload.UrlSource;
-
+import android.view.*;
+import android.widget.*;
+import com.liulishuo.filedownloader.*;
+import com.mio.mclauncher.mcdownload.*;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class ActivityDownload extends AppCompatActivity {
 	private TextView download_text_version;
 	private ListView download_list_versions;
 	private RadioGroup download_radio_group;
-	private String url_version_manifest,
-			url_libraries,
-			url_version_json,
-			url_version_jar,
-			url_assets_index,
-			url_assets_objs;
+	private String url_version_manifest, url_libraries, url_version_json, url_version_jar, url_assets_index, url_assets_objs;
 	private int versionType=MioMcVersion.RELEASE;
 	private ArrayAdapter adapter;
 	private MioMcVersion mioMcVersion;
@@ -82,7 +52,6 @@ public class ActivityDownload extends AppCompatActivity {
 			getVersionManifest();
 			menu.dismiss();
 		});
-
 		download_text_version.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -117,26 +86,18 @@ public class ActivityDownload extends AppCompatActivity {
 				autodownloadProgressDialog.setCanceledOnTouchOutside(false);
 				autodownloadProgressDialog.show();
 			}
-		}catch (Exception e){
-
-		}
+		}catch (Exception e){}
 	}
 	public boolean checkApplication(String packageName) {
-
 		if (packageName == null || "".equals(packageName)) {
-
 			return false;
-
 		}
-
 		try {
-
 			ApplicationInfo info = getPackageManager().getApplicationInfo(packageName, PackageManager.GET_UNINSTALLED_PACKAGES);
 			return true;
 		} catch (PackageManager.NameNotFoundException e) {
 			return false;
 		}
-
 	}
 	private ForgeDownload forgeDownload;
 	private OptifineDownload optifineDownload;
@@ -156,20 +117,15 @@ public class ActivityDownload extends AppCompatActivity {
 			download_list_versions.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 				@Override
 				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-					AlertDialog dialog=new AlertDialog.Builder(ActivityDownload.this)
-							.setMessage("是否要下载版本："+listVersions.get(position)+"?")
-							.setPositiveButton("是", new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									doDownload(listVersions.get(position));
-								}
-							})
-							.setNegativeButton("否", new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-
-								}
-							}).create();
+					AlertDialog dialog=new AlertDialog.Builder(ActivityDownload.this).setMessage("是否要下载版本："+listVersions.get(position)+"?").setPositiveButton("是", new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							doDownload(listVersions.get(position));
+						}
+					}).setNegativeButton("否", new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {}
+					}).create();
 					dialog.show();
 				}
 			});
@@ -177,27 +133,24 @@ public class ActivityDownload extends AppCompatActivity {
 				@Override
 				public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 					String[] items=new String[]{"Forge安装","高清修复安装","Fabric安装"};
-					AlertDialog dialog = new AlertDialog.Builder(ActivityDownload.this)
-							.setItems(items, new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dia, int which) {
-									switch (which){
-										case 0:
-											installForge(position);
-											toast("正在获取文件列表...");
-											break;
-										case 1:
-											installOptiFine(position);
-											toast("正在获取文件列表...");
-											break;
-										case 2:
-											installFabric();
-											break;
+					AlertDialog dialog = new AlertDialog.Builder(ActivityDownload.this).setItems(items, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dia, int which) {
+							switch (which){
+								case 0:
+									installForge(position);
+									toast("正在获取文件列表...");
+									break;
+								case 1:
+									installOptiFine(position);
+									toast("正在获取文件列表...");
+									break;
+								case 2:
+									installFabric();
+									break;
 									}
 								}
-							})
-							.setNegativeButton("取消", null)
-							.create();
+							}).setNegativeButton("取消", null).create();
 					dialog.show();
 					return false;
 				}
@@ -215,19 +168,13 @@ public class ActivityDownload extends AppCompatActivity {
 				.setForceReDownload(false)
 				.setListener(new FileDownloadListener() {
 					@Override
-					protected void pending(BaseDownloadTask task, int soFarBytes, int totalBytes) {
-
-					}
-
+					protected void pending(BaseDownloadTask task, int soFarBytes, int totalBytes) {}
 					@Override
 					protected void started(BaseDownloadTask task) {
 						textFile.setText(task.getFilename());
 					}
-
 					@Override
-					protected void connected(BaseDownloadTask task, String etag, boolean isContinue, int soFarBytes, int totalBytes) {
-					}
-
+					protected void connected(BaseDownloadTask task, String etag, boolean isContinue, int soFarBytes, int totalBytes) {}
 					@Override
 					protected void progress(BaseDownloadTask task, int soFarBytes, int totalBytes) {
 						long progress=soFarBytes * 100 / totalBytes;
@@ -236,33 +183,24 @@ public class ActivityDownload extends AppCompatActivity {
 						totalProgressBar.setProgress((int)progress);
 						textTotalProgress.setText(progress + "%");
 					}
-
 					@Override
-					protected void blockComplete(BaseDownloadTask task) {
-					}
-
+					protected void blockComplete(BaseDownloadTask task) {}
 					@Override
 					protected void retry(final BaseDownloadTask task, final Throwable ex, final int retryingTimes, final int soFarBytes) {
 					}
-
 					@Override
 					protected void completed(BaseDownloadTask task) {
 						mDialog.dismiss();
 						openInstaller(new File(MioInfo.DIR_TEMP,task.getFilename()).getAbsolutePath());
 					}
-
 					@Override
-					protected void paused(BaseDownloadTask task, int soFarBytes, int totalBytes) {
-					}
-
+					protected void paused(BaseDownloadTask task, int soFarBytes, int totalBytes) {}
 					@Override
 					protected void error(BaseDownloadTask task, Throwable e) {
 						toast("错误："+e.toString());
 					}
-
 					@Override
-					protected void warn(BaseDownloadTask task) {
-					}
+					protected void warn(BaseDownloadTask task) {}
 				}).start();
 	}
 

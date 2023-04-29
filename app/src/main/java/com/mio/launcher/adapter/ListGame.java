@@ -55,23 +55,17 @@ public class ListGame extends BaseAdapter {
         remove.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View p1) {
-                AlertDialog dialog=new AlertDialog.Builder(context)
-                        .setTitle("提示")
-                        .setMessage("确定要删除：" + gamelist.get(position) + "吗？")
-                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dia, int which) {
-                                MioUtils.deleteFile(new File(MioInfo.DIR_VERSIONS,gamelist.get(position)).getAbsolutePath());
-                                gamelist.remove(gamelist.get(position));
-                                ListGame.this.notifyDataSetChanged();
-                            }
-                        })
-                        .setNegativeButton("取消", null)
-                        .create();
+                AlertDialog dialog=new AlertDialog.Builder(context).setTitle("提示").setMessage("确定要删除：" + gamelist.get(position) + "吗？").setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dia, int which) {
+                        MioUtils.DeleteFolder(new File(MioInfo.DIR_VERSIONS,gamelist.get(position)).getAbsolutePath());
+                        gamelist.remove(gamelist.get(position));
+                        ListGame.this.notifyDataSetChanged();
+                    }
+                }).setNegativeButton("取消", null).create();
                 dialog.show();
             }
         });
-
         return convertView;
     }
 }

@@ -11,22 +11,10 @@ import android.text.format.Formatter;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.security.MessageDigest;
 
-public class MioUtils 
-{
+public class MioUtils {
     public static boolean moveFile(String src, String dest) {
         File fs=new File(src);
         if (!fs.exists()) {
@@ -79,72 +67,98 @@ public class MioUtils
     public static String getExternalFilesDir(Context context){
         return context.getExternalFilesDir(null).getParentFile().getAbsolutePath();
     }
-    public static void copyFromAssets(Context context, String source,
-                                      String destination) throws IOException {
-        /**
-         * 获取assets目录下文件的输入流
-         *
-         * 1、获取AssetsManager : 调用 Context 上下文对象的 context.getAssets() 即可获取 AssetsManager对象;
-         * 2、获取输入流 : 调用 AssetsManager 的 open(String fileName) 即可获取对应文件名的输入流;
-         */
-        InputStream is = context.getAssets().open(source);
-        // 获取文件大小
-        int size = is.available();
-        // 创建文件的缓冲区
-        byte[] buffer = new byte[size];
-        // 将文件读取到缓冲区中
-        is.read(buffer);
-        // 关闭输入流
-        is.close();
-        /*
-         *  打开app安装目录文件的输出流
-         *  Context.MODE_PRIVATE  设置该文件只能被本应用使用，为私有数据
-         */
-        FileOutputStream output = new FileOutputStream(destination);
-        // 将文件从缓冲区中写出到内存中
-        output.write(buffer);
-        //关闭输出流
-        output.close();
+    public static void copyFilesFromAssets(Context context, String assetsPath, String savePath){
+        try {
+            String[] fileNames = context.getAssets().list(assetsPath);// 获取assets目录下的所有文件及目录名
+            if (fileNames.length > 0) {// 如果是目录
+                File file = new File(savePath);
+                file.mkdirs();// 如果文件夹不存在，则递归
+                for (String fileName : fileNames) {
+                    copyFilesFromAssets(context, assetsPath + "/" + fileName, savePath + "/" + fileName);
+                }
+            } else {// 如果是文件
+                InputStream is = context.getAssets().open(assetsPath);
+                FileOutputStream fos = new FileOutputStream(new File(savePath));
+                byte[] buffer = new byte[1024];
+                int byteCount = 0;
+                while ((byteCount = is.read(buffer)) != -1) {// 循环从输入流读取
+                    // buffer字节
+                    fos.write(buffer, 0, byteCount);// 将读取的输入流写入到输出流
+                }
+                fos.flush();// 刷新缓冲区
+                is.close();
+                fos.close();
+            }
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
-    public static boolean deleteFile(String src) {
-        File fs=new File(src);
-        if (!fs.exists()) {
+    /**
+     * 删除单个文件
+     * @param   filePath    被删除文件的文件名
+     * @return 文件删除成功返回true，否则返回false
+    **/
+    public static boolean deleteFile(String filePath) {
+        File file = new File(filePath);
+        if (file.isFile() && file.exists()) {
+            return file.delete();
+        }
+        return false;
+    }
+
+    /**
+     * 删除文件夹以及目录下的文件
+     * @param   filePath 被删除目录的文件路径
+     * @return  目录删除成功返回true，否则返回false
+    **/
+    public static boolean deleteDirectory(String filePath) {
+        boolean flag = false;
+        //如果filePath不以文件分隔符结尾，自动添加文件分隔符
+        if (!filePath.endsWith(File.separator)) {
+            filePath = filePath + File.separator;
+        }
+        File dirFile = new File(filePath);
+        if (!dirFile.exists() || !dirFile.isDirectory()) {
             return false;
         }
-        if (fs.isDirectory()) {
-            for (File f:fs.listFiles()) {
-                deleteFile(f.getAbsolutePath());
+        flag = true;
+        File[] files = dirFile.listFiles();
+        //遍历删除文件夹下的所有文件(包括子目录)
+        for (int i = 0; i < files.length; i++) {
+            if (files[i].isFile()) {
+                //删除子文件
+                flag = deleteFile(files[i].getAbsolutePath());
+                if (!flag) break;
+            } else {
+                //删除子目录
+                flag = deleteDirectory(files[i].getAbsolutePath());
+                if (!flag) break;
             }
+        }
+        if (!flag) return false;
+        //删除当前空目录
+        return dirFile.delete();
+    }
+
+    /**
+     * 根据路径删除指定的目录或文件，无论存在与否
+     * @param filePath  要删除的目录或文件
+     * @return 删除成功返回 true，否则返回 false。
+    **/
+    public static boolean DeleteFolder(String filePath) {
+        File file = new File(filePath);
+        if (!file.exists()) {
+            return false;
         } else {
-            fs.delete();
-            return true;
-        }
-        fs.delete();
-        return true;
-	}
-	public static void deleteFolder(File file){
-        //判断文件不为null或文件目录存在
-        if (file == null || !file.exists()){
-            
-            System.out.println("文件删除失败,请检查文件路径是否正确");
-            return;
-        }
-        //取得这个目录下的所有子文件对象
-        File[] files = file.listFiles();
-        //遍历该目录下的文件对象
-        for (File f: files){
-            //打印文件名
-            String name = file.getName();
-            System.out.println(name);
-            //判断子目录是否存在子目录,如果是文件则删除
-            if (f.isDirectory()){
-                deleteFolder(f);
-            }else {
-                f.delete();
+            if (file.isFile()) {
+                // 为文件时调用删除文件方法
+                return deleteFile(filePath);
+            } else {
+                // 为目录时调用删除目录方法
+                return deleteDirectory(filePath);
             }
         }
-        //删除空文件夹  for循环已经把上一层节点的目录清空。
-        file.delete();
     }
     public static boolean dirCopy(String srcPath, String destPath) {
         File src = new File(srcPath);
@@ -268,64 +282,6 @@ public class MioUtils
         String[] tmp=libName.split(":");
         return tmp[0].replace(".","/")+"/"+tmp[1]+"/"+tmp[2]+"/"+tmp[1]+"-"+tmp[2]+".jar";
     }
-
-    /**
-     * 复制assets目录下所有文件及文件夹到指定路径
-     * @param  mActivity 上下文
-     * @param  mAssetsPath Assets目录的相对路径
-     * @param  mSavePath 复制文件的保存路径
-     * @return void
-     */
-    public static boolean copyAssetsFiles(android.app.Activity mActivity,java.lang.String mAssetsPath,java.lang.String mSavePath) {
-        try {
-            // 获取assets目录下的所有文件及目录名
-            java.lang.String[] fileNames=mActivity.getResources().getAssets().list(mAssetsPath);
-            if(fileNames.length>0) {
-                // 若是目录
-                for(java.lang.String fileName:fileNames) {
-                    java.lang.String newAssetsPath="";
-                    // 确保Assets路径后面没有斜杠分隔符，否则将获取不到值
-                    if((mAssetsPath==null)||"".equals(mAssetsPath)||"/".equals(mAssetsPath)) {
-                        newAssetsPath=fileName;
-                    }
-                    else {
-                        if(mAssetsPath.endsWith("/")) {
-                            newAssetsPath=mAssetsPath+fileName;
-                        }
-                        else {
-                            newAssetsPath=mAssetsPath+"/"+fileName;
-                        }
-                    }
-                    // 递归调用
-                    copyAssetsFiles(mActivity,newAssetsPath,mSavePath+"/"+fileName);
-                }
-            }
-            else {
-                // 若是文件
-                java.io.File file=new java.io.File(mSavePath);
-                // 若文件夹不存在，则递归创建父目录
-                file.getParentFile().mkdirs();
-                java.io.InputStream is=mActivity.getResources().getAssets().open(mAssetsPath);
-                java.io.FileOutputStream fos=new java.io.FileOutputStream(new java.io.File(mSavePath));
-                byte[] buffer=new byte[1024];
-                int byteCount=0;
-                // 循环从输入流读取字节
-                while((byteCount=is.read(buffer))!=-1) {
-                    // 将读取的输入流写入到输出流
-                    fos.write(buffer,0,byteCount);
-                }
-                // 刷新缓冲区
-                fos.flush();
-                fos.close();
-                is.close();
-            }
-        }
-        catch(java.lang.Exception e) {
-            Log.e("assets复制错误",e.toString());
-            return false;
-        }
-        return true;
-    }
     public static String getFileSha1(String path) {
 
         try {
@@ -375,6 +331,16 @@ public class MioUtils
         }
         return hexString.toUpperCase();
     }
-
-    
+    //创建目录
+    public static void createDirectory(String path){
+        if (!new File(path).exists()){
+            new File(path).mkdirs();
+        }
+    }
+    //创建文件
+    public static void createFile(String path) throws IOException {
+        if (!new File(path).exists()){
+            new File(path).createNewFile();
+        }
+    }
 }

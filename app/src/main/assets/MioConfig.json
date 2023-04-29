@@ -13,5 +13,5 @@
   "user_type": "mojang",
   "auth_session": "0",
   "auth_player_name": "Mio",
-  "extraJavaFlags": "-Xmx1500M"
+  "extraJavaFlags": "-Xmx1024M"
 }

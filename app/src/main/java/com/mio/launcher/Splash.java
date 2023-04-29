@@ -13,33 +13,29 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
-import android.os.Environment;
+import android.os.*;
 import android.provider.Settings;
-import android.util.Log;
-import android.widget.Space;
+import android.widget.TextView;
 import android.widget.Toast;
-
-import java.io.File;
-import java.io.IOException;
-
+import java.io.*;
 import cosine.boat.LauncherConfig;
 
 /**
  * @author mio
- */
+**/
 public class Splash extends Activity {
+	private Handler handler;
+	TextView waitText;
 	@RequiresApi(api = Build.VERSION_CODES.M)
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		MioUtils.hideBottomMenu(this, true);
 		setContentView(R.layout.splash);
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-			if (Environment.isExternalStorageManager()) {
-				init();
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {//安卓>=11
+			if (Environment.isExternalStorageManager()) {//有权限
 				fileCheck();
-			}else {
+			}else {//没权限
 				Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
 				intent.setData(Uri.parse("package:" + getPackageName()));
 				/**
@@ -50,10 +46,9 @@ public class Splash extends Activity {
 			}
 		}else{//安卓<11
 			String[] permissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE};
-			if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-				init();
+			if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {//有权限
 				fileCheck();
-			}else {
+			}else {//没权限
 				AlertDialog dialog=new AlertDialog.Builder(this).setTitle("警告").setMessage("检测到应用无读写权限，请点击申请。").setPositiveButton("申请", new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
@@ -74,73 +69,42 @@ public class Splash extends Activity {
 			startActivityForResult(intent, 233);
 		}
 	}
-
-	public void init(){
-		new File(MioInfo.DIR_VERSIONS).mkdirs();
-		new File(MioInfo.DIR_LIBRARIES).mkdirs();
-		new File(MioInfo.DIR_INDEXES).mkdirs();
-		new File(MioInfo.DIR_OBJECTS).mkdirs();
-		new File(MioInfo.DIR_TEMP,"version_manifest.json");
-		try {
-			new File(MioInfo.DIR_MAIN,".nomedia").createNewFile();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 	private void fileCheck(){
-		new Thread(()->{
-			File runtime= new File(MioInfo.DIR_DATA,"app_runtime");
-			File config1= new File(MioInfo.DIR_MAIN,"MioConfig.json");
-			File profile= new File(MioInfo.DIR_GAME,"launcher_profiles.json");
-			File busybox=new File(runtime,"busybox");
-			File gamedir=new File(MioInfo.DIR_GAMEDIR_JSON);
-//			File caciacavallo=new File(MioInfo.DIR_DATA,"caciacavallo");
-			if (!runtime.exists()){
-				toast("正在安装运行库。");
-				MioUtils.copyAssetsFiles(Splash.this,"app_runtime",runtime.getAbsolutePath());
-				toast("安装完毕。");
-			}
-			if(!busybox.exists()){
-				MioUtils.copyAssetsFiles(Splash.this,"app_runtime/busybox",busybox.getAbsolutePath());
+		handler = new Handler();
+		new Thread(() -> {
+			waitText = findViewById(R.id.wait_text_info);
+			MioInfo.initializeMioInfo(Splash.this);
+			File runtime = new File(MioInfo.DIR_DATA,"app_runtime");
+			File config1 = new File(MioInfo.defaultMioLauncherDir_Public,"MioConfig.json");
+			File busybox = new File(runtime,"busybox");
+			if ((!new File(MioInfo.jre8Dir).exists()  || !new File(MioInfo.runtimeDir + "/version").exists())){
+				Splash.this.runOnUiThread(() -> waitText.setText("正在补全必要文件请耐心等待"));
+				MioUtils.copyFilesFromAssets(Splash.this,"app_runtime",runtime.getAbsolutePath());
 				busybox.setExecutable(true);
+				MioUtils.DeleteFolder(MioInfo.defaultGameDir_Public);
+				MioUtils.copyFilesFromAssets(Splash.this,".minecraft",MioInfo.defaultGameDir_Public);
+				Splash.this.runOnUiThread(() -> waitText.setText("安装完毕"));
+			}if(!new File(MioInfo.defaultMioLauncherDir_Public + "/MioConfig.json").exists()){
+				MioUtils.copyFilesFromAssets(Splash.this,"gamedir.json",new File(MioInfo.DIR_GAMEDIR_JSON).getAbsolutePath());
+				MioUtils.copyFilesFromAssets(Splash.this,"MioConfig.json",config1.getAbsolutePath());
+				MioUtils.copyFilesFromAssets(Splash.this,"launcher_profiles.json",new File(MioInfo.defaultGameDir_Public,"launcher_profiles.json").getAbsolutePath());
 			}
-			if (!gamedir.exists()){
-				try {
-					MioUtils.copyFromAssets(Splash.this,gamedir.getName(),gamedir.getAbsolutePath());
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-			if (!config1.exists()){
-				try {
-					MioUtils.copyFromAssets(Splash.this,config1.getName(),config1.getAbsolutePath());
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-			if (!profile.exists()){
-				try {
-					MioUtils.copyFromAssets(Splash.this,profile.getName(),profile.getAbsolutePath());
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-			MioInfo.config=LauncherConfig.fromFile(config1.getAbsolutePath());
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			runOnUiThread(()->{
-				startActivity(new Intent(Splash.this,MioLauncher.class));
-				finish();
-			});
+			MioInfo.config = LauncherConfig.fromFile(config1.getAbsolutePath());
+			handler.post(runnableUi);
 		}).start();
 	}
+	Runnable runnableUi = new Runnable(){
+		@Override
+		public void run() {
+			//在这里写更新UI的操作
+			startActivity(new Intent(Splash.this,MioLauncher.class));
+			finish();
+		}
+	};
 	private void toast(String s){
 		runOnUiThread(()-> Toast.makeText(this, s, Toast.LENGTH_SHORT).show());
 	}
-	//安卓11开始特殊权限申请引入的回调
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
@@ -148,7 +112,6 @@ public class Splash extends Activity {
 		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R){//安卓 >= 11
 			if(Environment.isExternalStorageManager()){
 				//用户同意[即有权限]，执行操作
-				init();
 				fileCheck();
 			}else{
 				//用户不同意，向用户展示该权限作用
@@ -163,14 +126,12 @@ public class Splash extends Activity {
 			}
 		}
 	}
-	//安卓6.0开始一般权限申请引入的回调
 	@Override
 	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 		if (requestCode == 233) {
 			if (grantResults[0]==PackageManager.PERMISSION_GRANTED){
 				toast("读写权限获取成功");
-				init();
 				fileCheck();
 			}else{
 				AlertDialog.Builder alert = new AlertDialog.Builder(this);

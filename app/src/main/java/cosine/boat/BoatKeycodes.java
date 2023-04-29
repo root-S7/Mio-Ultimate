@@ -33,8 +33,7 @@ package cosine.boat;
 
 /**
  * @author elias_naur
- */
-
+**/
 public class BoatKeycodes {
 	public static final int BOAT_KEYBOARD_0 = 48;
     public static final int BOAT_KEYBOARD_1 = 49;

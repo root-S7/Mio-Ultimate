@@ -105,9 +105,7 @@ public class MioCommand {
                 @Override
                 public void run() {
                     try {
-
                         Process proc = Runtime.getRuntime().exec(cmd);
-
                         // 标准输入流（必须写在 waitFor 之前）
                         consumeInputStream2(proc.getInputStream());
                         // 标准错误流（必须写在 waitFor 之前）
@@ -129,7 +127,6 @@ public class MioCommand {
                             msg.obj = s;
                             handler.sendMessage(msg);
                         }
-
                     } catch (Exception e) {
                         System.out.println(e);
                         Message msg=new Message();
@@ -150,7 +147,7 @@ public class MioCommand {
     }
     /**
      *   消费inputstream，并返回
-     */
+    **/
     public String consumeInputStream(InputStream is) {
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(is));

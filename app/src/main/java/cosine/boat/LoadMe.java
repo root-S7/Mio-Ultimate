@@ -2,10 +2,7 @@ package cosine.boat;
 
 import android.util.ArrayMap;
 import android.util.Log;
-
 import com.mio.launcher.MioInfo;
-import com.mio.launcher.MioUtils;
-
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.Map;
@@ -43,13 +40,11 @@ public class LoadMe {
             Log.e(TAG, "LogReceiver is null. So use default receiver.");
             mReceiver = new WeakReference<LogReceiver>(new LogReceiver() {
                 final StringBuilder builder = new StringBuilder();
-
                 @Override
                 public void pushLog(String log) {
                     Log.e(TAG, log);
                     builder.append(log);
                 }
-
                 @Override
                 public String getLogs() {
                     return builder.toString();
@@ -65,7 +60,7 @@ public class LoadMe {
 
             MinecraftVersion mcVersion = MinecraftVersion.fromDirectory(new File(config.get("currentVersion")));
 
-            String runtimePath = "/data/data/com.mio.launcher/app_runtime";
+            String runtimePath = MioInfo.runtimeDir;
             getAllLib(new File(runtimePath));
 
             String home = config.get("currentVersion");
@@ -120,7 +115,7 @@ public class LoadMe {
             }
             setupJLI();
 
-            redirectStdio(new File(MioInfo.DIR_MAIN,"boat_output.txt").getAbsolutePath());
+            redirectStdio(new File(MioInfo.defaultMioLauncherDir_Public,"boat_output.txt").getAbsolutePath());
             chdir(home);
 
 
@@ -149,12 +144,12 @@ public class LoadMe {
                 args.add("-Dfml.earlyprogresswindow=false");
             }
             //java参数
-            args.add("-Djava.io.tmpdir=/data/data/com.mio.launcher/cache");
+            args.add("-Djava.io.tmpdir=" + MioInfo.cacheDir);
             //args.add("-Duser.home=null");
             args.add("-Dminecraft.launcher.brand=MioPro");
             args.add("-Dfml.ignoreInvalidMinecraftCertificates=true");
             args.add("-Dfml.ignorePatchDiscrepancies=true");
-            args.add("-Djava.home=" + runtimePath +"/j2re-image");
+            args.add("-Djava.home=" + MioInfo.jre8Dir);
             args.add("-Duser.language=zh");
             args.add("-Duser.country=CN");
             args.add("-Dnet.minecraft.clientmodname=Mio-Ultimate");

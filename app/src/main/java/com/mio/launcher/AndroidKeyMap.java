@@ -1,8 +1,6 @@
 package com.mio.launcher;
 
 import android.view.KeyEvent;
-
-
 import java.util.HashMap;
 import cosine.boat.BoatKeycodes;
 

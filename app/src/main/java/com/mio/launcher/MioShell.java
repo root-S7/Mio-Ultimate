@@ -1,14 +1,9 @@
 package com.mio.launcher;
 
 import android.util.Log;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 
 public class MioShell {
-
     public static void doShell(String cmd) throws Exception {
         Log.e("命令",cmd);
         Process proc = Runtime.getRuntime().exec((cmd).split(" "));
@@ -23,7 +18,6 @@ public class MioShell {
             Log.e("失败",errStr);
         }
     }
-
     private static String consumeInputStream(InputStream is) {
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(is));

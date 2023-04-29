@@ -13,32 +13,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.PopupWindow;
+import android.widget.*;
 import android.widget.RelativeLayout.LayoutParams;
-import android.widget.TextView;
-import android.widget.Toast;
 import com.chenzy.owloading.OWLoadingView;
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
-
 import com.mio.launcher.MioInfo;
 import com.mio.launcher.R;
 import com.leon.lfilepickerlibrary.LFilePicker;
 import com.mio.launcher.MioUtils;
 import com.mio.launcher.MioLogin;
-import com.mio.launcher.Splash;
 
 public class MioPack extends Activity {
 	ListView mio_left,mio_right;
@@ -65,7 +52,6 @@ public class MioPack extends Activity {
 			new File(MioUtils.getExternalFilesDir(this),"/澪").mkdir();
 			System.out.println( new File(MioUtils.getExternalFilesDir(this),"/澪/PACK").mkdir());
 		}
-		
 		base = LayoutInflater.from(MioPack.this).inflate(R.layout.loading,null);
 		OWLoadingView ow=base.findViewById(R.id.ow);
         ImageButton exit=base.findViewById(R.id.loadingImageButtonExit);
@@ -85,7 +71,6 @@ public class MioPack extends Activity {
 		popupWindow.setContentView(base);
 		ow.setAutoStartAnim(true);
 		new Handler().postDelayed(new Runnable(){
-
                 @Override
                 public void run() {
                     new Thread(new Runnable(){
@@ -172,14 +157,10 @@ boolean win=true;
 
 					}
 				});
-
-
-
 			return convertView;
 		}
 	}
 	public class MioAdapter_right_pack extends BaseAdapter {
-
 		private Context context;
 		public List<File> list;
 		private MioAdapter_left_pack left;
@@ -231,7 +212,6 @@ boolean win=true;
 
 					}
 				});
-
 			return convertView;
 		}
 	}

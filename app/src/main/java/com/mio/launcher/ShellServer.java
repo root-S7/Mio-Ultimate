@@ -1,20 +1,14 @@
 package com.mio.launcher;
 
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.io.*;
+import java.util.*;
 
 public class ShellServer extends Thread
 {
     private Process process;
     private BufferedReader output;
     private Callback callback;
-    String runtimePath = "/data/data/com.mio.launcher/app_runtime/j2re-image";
+    String runtimePath = MioInfo.jre8Dir;
 
     public ShellServer(Callback callback, String shell, String home){
         this.callback = callback;

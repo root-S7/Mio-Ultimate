@@ -8,7 +8,6 @@ import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
 import cat.ereza.customactivityoncrash.config.CaocConfig;
 import cn.dreamtobe.filedownloader.OkHttp3Connection;
 import okhttp3.OkHttpClient;
-
 import com.liulishuo.filedownloader.FileDownloader;
 import com.mio.launcher.MioLauncher;
 import com.mio.launcher.R;
