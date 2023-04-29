@@ -3,7 +3,7 @@
 <div>
     <div>
         <a href="https://github.com/root-S7/Mio-Ultimate">Mio-Ultimate</a>项目是Boat澪启动器0.4版本备份存档。
-        <div>&emsp;&emsp;仅修改获取公有目录权限方式[适配安卓11+]和在线公告</div
+        <div>&emsp;&emsp;仅修改获取公有目录权限方式[适配安卓11+]和在线公告</div>
     </div>
     <br>
     <div>
