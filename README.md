@@ -2,12 +2,12 @@
 
 <div>
     <div>
-        <a href="https://github.com/root-S7/Mio-Ultimate">Mio-Ultimate</a>项目是Boat澪启动器0.4版本备份存档。
+        <a href="https://github.com/root-S7/Mio-Ultimate/tree/main">Mio-Ultimate</a>项目是Boat澪启动器0.4版本备份存档。
         <div>&emsp;&emsp;仅修改获取公有目录权限方式[适配安卓11+]和在线公告</div>
     </div>
     <br>
     <div>
-        <a href="https://github.com/root-S7/Mio-Ultimate-Server">Mio-Ultimate-Server</a>项目是Boat服务器版专属客户端。[暂不合并分支]
+        <a href="https://github.com/root-S7/Mio-Ultimate/tree/server-client">Mio-Ultimate-Server</a>项目是Boat服务器版专属客户端。
         <div>&emsp;&emsp;修改内容如下：</div>
         <div>&emsp;&emsp;&emsp;1.适合服务器客户端使用,内置了直装模块[assets/.minecraft]</div>
         <div>&emsp;&emsp;&emsp;2.去除res资源目录混淆以便用户修改</div>
