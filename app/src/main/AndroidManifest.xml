@@ -21,11 +21,14 @@
         android:name="cosine.boat.MyApplication"
         android:icon="@drawable/ic"
         android:largeHeap="true"
+        android:usesCleartextTraffic="true"
+        android:isGame="true"
         android:supportsRtl="true"
         android:label="@string/app_name"
         android:requestLegacyExternalStorage="true"
         android:networkSecurityConfig="@xml/network_security_config"
-        android:theme="@style/BoatTheme">
+        android:theme="@style/BoatTheme"
+        tools:targetApi="m">
 
         <activity
             android:name="com.mio.launcher.Splash"
