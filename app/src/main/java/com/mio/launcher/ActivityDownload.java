@@ -92,16 +92,12 @@ public class ActivityDownload extends AppCompatActivity {
 		download_radio_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(RadioGroup group, int checkedId) {
-				switch (checkedId){
-					case R.id.ac_download_officialRadioButton_release:
-						versionType = MioMcVersion.RELEASE;
-						break;
-					case R.id.ac_download_officialRadioButton_snapshot:
-						versionType = MioMcVersion.SNAPSHOT;
-						break;
-					case R.id.ac_download_officialRadioButton_old:
-						versionType = MioMcVersion.BETA;
-						break;
+				if(checkedId == R.id.ac_download_officialRadioButton_release){
+					versionType = MioMcVersion.RELEASE;
+				}else if(checkedId == R.id.ac_download_officialRadioButton_snapshot){
+					versionType = MioMcVersion.SNAPSHOT;
+				}else if(checkedId == R.id.ac_download_officialRadioButton_old){
+					versionType = MioMcVersion.BETA;
 				}
 				refreshAdapter();
 			}

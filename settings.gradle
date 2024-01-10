@@ -1,4 +1,32 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral {
+            url "https://maven.aliyun.com/repository/central"
+        }
+        gradlePluginPortal {
+            url "https://maven.aliyun.com/repository/gradle-plugin"
+        }
+        maven {
+            url "https://jitpack.io"
+        }
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral {
+            url "https://maven.aliyun.com/repository/central"
+        }
+        jcenter()
+        maven {
+            url "https://jitpack.io"
+        }
+    }
+}
+
 rootProject.name = "Mio-Ultimate"
-include ':MioCustom'
-include ':lfilepickerlibrary'
 include ':app'
+include ':lfilepickerlibrary'
+include ':MioCustom'

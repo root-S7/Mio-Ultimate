@@ -69,7 +69,7 @@ import android.view.ViewGroup;
 /**
  * @author mio
  */
-public class BoatActivity extends Activity implements TextureView.SurfaceTextureListener, View.OnClickListener, TextView.OnEditorActionListener
+public class BoatActivity extends Activity implements TextureView.SurfaceTextureListener, OnClickListener, TextView.OnEditorActionListener
 {
 	static{
 		System.loadLibrary("boat");
@@ -383,7 +383,7 @@ public class BoatActivity extends Activity implements TextureView.SurfaceTexture
         mio_gif_layout.setX((screenwidth / 2)-(mio.getWidth()/2));
         mio_gif_layout.setY((screenheight / 2)-(mio.getHeight()/2));
 
-        mio_gif_touch.setOnTouchListener(new View.OnTouchListener(){
+        mio_gif_touch.setOnTouchListener(new OnTouchListener(){
             private int 触摸点横坐标_gif;
 
             private int 触摸点纵坐标_gif;
@@ -863,7 +863,7 @@ public class BoatActivity extends Activity implements TextureView.SurfaceTexture
                         .setTitle("新增命令")//提示框标题
                         .setView(add_command)
                         .setPositiveButton(getStr(R.string.ok),//提示框的两个按钮
-                        new android.content.DialogInterface.OnClickListener() {
+                        new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which)
                             {

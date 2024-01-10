@@ -3,21 +3,23 @@ plugins {
 }
 
 android {
-    compileSdkVersion 33
-    buildToolsVersion "30.0.3"
+    namespace 'com.mio.launcher'
+    compileSdk 34
     aaptOptions{
         ignoreAssetsPattern '!.svn:!.git:<dir>_*:!CVS:!thumbs.db:!picasa.ini:!*.scc:*~'
     }
     defaultConfig {
         applicationId "com.mio.launcher"
-        minSdkVersion 21
-        targetSdkVersion 33
+        minSdk 21
+        targetSdk 33
         versionCode 1
         versionName "0.4"
         ndk {
+            //noinspection ChromeOsAbiSupport
             abiFilters 'arm64-v8a'
             moduleName "app"
         }
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -31,12 +33,11 @@ android {
             version "3.18.1"
         }
     }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    ndkVersion '22.1.7171670'
+    ndkVersion '25.1.8937393'
 }
 
 dependencies {
@@ -44,17 +45,16 @@ dependencies {
     implementation project(':lfilepickerlibrary')
     implementation 'com.xw.repo:bubbleseekbar:3.20-lite'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    compileOnly 'com.google.code.gson:gson:2.10'
+    implementation 'com.google.code.gson:gson:2.10.1'
     implementation 'cn.dreamtobe.filedownloader:filedownloader-okhttp3-connection:1.1.0'
     implementation 'com.squareup.okhttp3:okhttp:4.9.3'
-	implementation 'androidx.cardview:cardview:1.0.0'
-	implementation 'com.google.android.material:material:1.8.0'
-	implementation 'androidx.appcompat:appcompat:1.6.1'
-	implementation 'com.liulishuo.filedownloader:library:1.7.7'
-	implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.23'
-	implementation 'cat.ereza:customactivityoncrash:2.4.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.liulishuo.filedownloader:library:1.7.7'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.23'
+    implementation 'cat.ereza:customactivityoncrash:2.4.0'
     implementation 'net.lingala.zip4j:zip4j:2.9.0'
-    // https://mvnrepository.com/artifact/commons-io/commons-io
     implementation 'commons-io:commons-io:2.11.0'
     implementation 'com.github.TheRandomLabs:CurseAPI-Minecraft:master-SNAPSHOT'
     implementation fileTree(dir: 'libs', include: ['*.jar'])

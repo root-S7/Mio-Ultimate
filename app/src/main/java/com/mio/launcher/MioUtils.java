@@ -276,14 +276,14 @@ public class MioUtils
      * @param  mSavePath 复制文件的保存路径
      * @return void
      */
-    public static boolean copyAssetsFiles(android.app.Activity mActivity,java.lang.String mAssetsPath,java.lang.String mSavePath) {
+    public static boolean copyAssetsFiles(Activity mActivity, String mAssetsPath, String mSavePath) {
         try {
             // 获取assets目录下的所有文件及目录名
-            java.lang.String[] fileNames=mActivity.getResources().getAssets().list(mAssetsPath);
+            String[] fileNames=mActivity.getResources().getAssets().list(mAssetsPath);
             if(fileNames.length>0) {
                 // 若是目录
-                for(java.lang.String fileName:fileNames) {
-                    java.lang.String newAssetsPath="";
+                for(String fileName:fileNames) {
+                    String newAssetsPath="";
                     // 确保Assets路径后面没有斜杠分隔符，否则将获取不到值
                     if((mAssetsPath==null)||"".equals(mAssetsPath)||"/".equals(mAssetsPath)) {
                         newAssetsPath=fileName;
@@ -302,11 +302,11 @@ public class MioUtils
             }
             else {
                 // 若是文件
-                java.io.File file=new java.io.File(mSavePath);
+                File file=new File(mSavePath);
                 // 若文件夹不存在，则递归创建父目录
                 file.getParentFile().mkdirs();
-                java.io.InputStream is=mActivity.getResources().getAssets().open(mAssetsPath);
-                java.io.FileOutputStream fos=new java.io.FileOutputStream(new java.io.File(mSavePath));
+                InputStream is=mActivity.getResources().getAssets().open(mAssetsPath);
+                FileOutputStream fos=new FileOutputStream(new File(mSavePath));
                 byte[] buffer=new byte[1024];
                 int byteCount=0;
                 // 循环从输入流读取字节
@@ -320,7 +320,7 @@ public class MioUtils
                 is.close();
             }
         }
-        catch(java.lang.Exception e) {
+        catch(Exception e) {
             Log.e("assets复制错误",e.toString());
             return false;
         }
