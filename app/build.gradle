@@ -1,26 +1,20 @@
 plugins {
-    id 'com.android.application'
+    alias(libs.plugins.android.application)
 }
 
 android {
     namespace 'com.mio.launcher'
     compileSdk 34
-    aaptOptions{
-        ignoreAssetsPattern '!.svn:!.git:<dir>_*:!CVS:!thumbs.db:!picasa.ini:!*.scc:*~'
-    }
+
     defaultConfig {
         applicationId "com.mio.launcher"
         minSdk 21
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "0.4"
-        ndk {
-            //noinspection ChromeOsAbiSupport
-            abiFilters 'arm64-v8a'
-            moduleName "app"
-        }
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -30,32 +24,38 @@ android {
     externalNativeBuild {
         cmake {
             path "src/main/jni/CMakeLists.txt"
-            version "3.18.1"
         }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    ndkVersion '25.1.8937393'
+    ndkVersion '23.1.7779620'
+    packagingOptions {
+        jniLibs {
+            useLegacyPackaging true
+        }
+    }
 }
 
 dependencies {
     implementation project(':MioCustom')
     implementation project(':lfilepickerlibrary')
-    implementation 'com.xw.repo:bubbleseekbar:3.20-lite'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'com.google.code.gson:gson:2.10.1'
-    implementation 'cn.dreamtobe.filedownloader:filedownloader-okhttp3-connection:1.1.0'
-    implementation 'com.squareup.okhttp3:okhttp:4.9.3'
-    implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'com.google.android.material:material:1.8.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.liulishuo.filedownloader:library:1.7.7'
-    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.23'
-    implementation 'cat.ereza:customactivityoncrash:2.4.0'
-    implementation 'net.lingala.zip4j:zip4j:2.9.0'
-    implementation 'commons-io:commons-io:2.11.0'
-    implementation 'com.github.TheRandomLabs:CurseAPI-Minecraft:master-SNAPSHOT'
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation libs.bubbleseekbar
+    implementation libs.constraintlayout
+    implementation libs.library
+    implementation libs.gson
+    implementation libs.filedownloader
+    implementation libs.okhttp
+    implementation libs.cardview
+    implementation libs.material
+    implementation libs.appcompat
+    implementation libs.gifdrawable
+    implementation libs.customactivityoncrash
+    implementation libs.zip4j
+    implementation libs.commonsio
+    implementation libs.curseapi
+    testImplementation libs.junit
+    androidTestImplementation libs.ext.junit
+    androidTestImplementation libs.espresso.core
 }

@@ -69,7 +69,7 @@ public class ActivityDownload extends AppCompatActivity {
 		download_radio_group=findViewById(R.id.ac_download_officialRadioGroup);
 		List<String> mList=new ArrayList<>();
 		mList.add("官方");
-		mList.add("MCBBS");
+		//mList.add("MCBBS");
 		mList.add("BMCL");
 		ListPopupWindow menu=new ListPopupWindow(this);
 		menu.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,mList));
@@ -923,6 +923,7 @@ public class ActivityDownload extends AppCompatActivity {
 				url_assets_index = UrlSource.OFFICIAL_ASSETS_INDEX_JSON;
 				url_assets_objs = UrlSource.OFFICIAL_ASSETS_OBJS;
 				break;
+			/**
 			case UrlSource.MCBBS:
 				url_version_manifest = UrlSource.MCBBS_VERSION_MANIFEST;
 				url_version_json = UrlSource.MCBBS_VERSION_JSON;
@@ -931,6 +932,7 @@ public class ActivityDownload extends AppCompatActivity {
 				url_assets_index = UrlSource.MCBBS_ASSETS_INDEX_JSON;
 				url_assets_objs = UrlSource.MCBBS_ASSETS_OBJS;
 				break;
+			**/
 			case UrlSource.BMCL:
 				url_version_manifest = UrlSource.BMCLAPI_VERSION_MANIFEST;
 				url_version_json = UrlSource.BMCLAPI_VERSION_JSON;

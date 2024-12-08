@@ -14,10 +14,10 @@ public class UrlSource {
     public static final String BMCLAPI_VERSION_MANIFEST = "https://bmclapi2.bangbang93.com/mc/game/version_manifest.json";
 
     public static final String MCBBS_ASSETS_INDEX_JSON = "https://download.mcbbs.net";
-    public static final String MCBBS_ASSETS_OBJS = "https://download.mcbbs.net/assets";
+    public static final String MCBBS_ASSETS_OBJS = "https://bmclapi2.bangbang93.com/assets";
     public static final String MCBBS_AUTHLIB_INJECTOR_JAR = "https://download.mcbbs.net/mirrors/authlib-injector/artifact/latest.json";
     public static final String MCBBS_FORGE_LIBRARIES = "https://download.mcbbs.net/maven";
-    public static final String MCBBS_LIBRARIES = "https://download.mcbbs.net/maven";
+    public static final String MCBBS_LIBRARIES = "https://bmclapi2.bangbang93.com/maven";
     public static final String MCBBS_LITELOADER_VERSION_JSON = "https://download.mcbbs.net/maven/com/mumfrey/liteloader/versions.json";
     public static final String MCBBS_VERSION_JAR = "https://download.mcbbs.net";
     public static final String MCBBS_VERSION_JSON = "https://download.mcbbs.net";

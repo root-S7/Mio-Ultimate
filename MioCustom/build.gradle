@@ -1,15 +1,16 @@
 plugins {
-    id 'com.android.library'
+    alias(libs.plugins.android.library)
 }
 
 android {
     namespace 'com.mio.mclauncher.customcontrol'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         minSdk 21
-        versionCode 1
-        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -19,12 +20,12 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
+
 dependencies {
-    implementation 'com.google.code.gson:gson:2.10.1'
-    implementation 'com.larswerkman:HoloColorPicker:1.5'
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation libs.gson
+    implementation libs.holocolorpicker
 }

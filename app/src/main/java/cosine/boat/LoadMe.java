@@ -301,9 +301,10 @@ public class LoadMe {
     }
     private static String findLib(String libName){
         try {
+            Log.d("lib查找", libs.get(libName).getAbsolutePath());
             return libs.get(libName).getAbsolutePath();
         }catch (Exception E){
-            Log.e("lib查找错误", libName.toString());
+            Log.d("lib查找错误", libName.toString());
         }
         return "";
     }
