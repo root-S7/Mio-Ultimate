@@ -16,3 +16,4 @@ local.properties
 *.apk
 release/
 debug/
+/.idea
